@@ -6,66 +6,84 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 10:20:33 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/14 13:03:20 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/17 10:41:57 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static long long	ft_get_min(t_stack *a)
+static long long	ft_get_min(t_list *a)
 {
 	long long	min;
 	
-	min = a->num;
-	if (a->next->num < min)
-		min = a->next->num;
-	if (a->prev->num < min)
-		min = a->prev->num;
+	min = a->content;
+	if (a->next->content < min)
+		min = a->next->content;
+	if (a->prev->content < min)
+		min = a->prev->content;
 	return (min);
 }
 
-static long long	ft_get_max(t_stack *a)
+static long long	ft_get_max(t_list *a)
 {
 	long long	max;
 	
-	max = a->num;
-	if (a->next->num > max)
-		max = a->next->num;
-	if (a->prev->num > max)
-		max = a->prev->num;
+	max = a->content;
+	if (a->next->content > max)
+		max = a->next->content;
+	if (a->prev->content > max)
+		max = a->prev->content;
 	return (max);
 }
 
-static long long	ft_get_mid(t_stack *a, long long min, long long	max)
+static long long	ft_get_mid(t_list *s, long long min, long long	max)
 {
-	if (a->num != min && a->num != max)
-		return (a->num);
-	else if (a->next->num != min && a->next->num != max)
-		return (a->next->num);
+	if (s->content != min && s->content != max)
+		return (s->content);
+	else if (s->next->content != min && s->next->content != max)
+		return (s->next->content);
 	else
-		return (a->prev->num);
+		return (s->prev->content);
 }
 
-static void	ft_solve_3(t_stack *a, long long min, long long mid, long long max)
+static void	ft_solve_3(t_frame *f, long long min, long long mid, long long max)
 {
-	if (a == min && a->next == max)
+	if (f->a == min && f->a->next == max)
 	{
-			ft_sa(a);
-			ft_solve_3(a);
+		ft_sa(s);
+		ft_solve_3(s, min, mid, max);
 	}
-	else if (a == mid)
+	else if (s == mid)
 	{
-		if (a->next == min)
-			ft_sa(a);
+		if (s->next == min)
+			ft_sa(s);
 		else
-			ft_rra(a);
+			ft_rra(s);
 	}
 	else
 	{
-		ft_ra(a);
-		if (a->next == mid)
-			ft_solve_3(a);
+		ft_ra(s);
+		if (s->next == mid)
+			ft_solve_3(s, min, mid, max);
 	}
 }
 
-void	solve_3(t_stack *a, int rotate_both)
+void	solve_3(t_list *s, int rev)
+{
+	long long	min;
+	long long	mid;
+	long long	max;
+
+	if (rev)
+	{
+		min = ft_get_max(s);
+		max = ft_get_min(s);
+	}
+	else
+	{
+		min = ft_get_min(s);
+		max = ft_get_max(s);
+	}
+	mid = ft_get_mid(s, min, max);
+	
+}

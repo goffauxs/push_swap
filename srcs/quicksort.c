@@ -6,12 +6,11 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:30:42 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/17 16:30:31 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/18 11:33:52 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 static int	ft_partition(int array[], int low, int high)
 {
@@ -40,7 +39,7 @@ static int	ft_partition(int array[], int low, int high)
 	return (i + 1);
 }
 
-void	ft_quicksort_recursive(int array[], int low, int high)
+static void	ft_quicksort_recursive(int array[], int low, int high)
 {
 	int	pi;
 
@@ -52,11 +51,11 @@ void	ft_quicksort_recursive(int array[], int low, int high)
 	}
 }
 
-int	ft_create_array(t_stack *stack, size_t len)
+int	ft_get_midpoint(t_node *head, size_t len)
 {
-	int	*array;
-	int	i;
-	int	n;
+	int		*array;
+	size_t	i;
+	int		midpoint;
 
 	i = 0;
 	array = malloc(sizeof(int) * len);
@@ -64,61 +63,12 @@ int	ft_create_array(t_stack *stack, size_t len)
 		return (0);
 	while (i < len)
 	{
-		array[i] = stack->val;
+		array[i] = head->val;
 		i++;
-		stack = stack->next;
+		head = head->next;
 	}
-	n = sizeof(array) / sizeof(array[0]);
-	printf("i: %d\n", i);
-	printf("n: %d\n", n);
-	return (n);
-}
-
-t_stack	*ft_create_node(int num)
-{
-	t_stack	*node;
-
-	node = malloc(sizeof(*node));
-	if (!node)
-		return (NULL);
-	node->val = num;
-	node->next = NULL;
-	node->prev = NULL;
-	return (node);
-}
-
-void	ft_insert_before_head(t_stack *head, t_stack *node)
-{
-	if (!head || !node)
-		return ;
-	node->prev = head->prev;
-	node->next = head;
-}
-
-void	ft_insert_after_head(t_stack *head, t_stack *node)
-{
-	if (!head || !node)
-		return ;
-	node->prev = head;
-	node->next = head->next;
-}
-
-int main(int argc, char *argv[])
-{
-	t_stack a;
-	// t_stack b;
-	int		n;
-	int		i;
-	int		**array;
-
-	i = 1;
-	a = NULL;
-	if (argc >= 2)
-	{
-		
-		while (argc)
-		{
-			
-		}	
-	}
+	ft_quicksort_recursive(array, 0, i - 1);
+	midpoint = array[i / 2];
+	free(array);
+	return (midpoint);
 }

@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:31:06 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/18 12:22:04 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/18 15:53:56 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,32 @@ int main(int argc, char *argv[])
 			ft_insert_after_head(a.head, ft_create_node(ft_atoi(argv[argc]), 0));
 			a.len++;
 		}
+		printf("A: \n");
 		ft_print_dll(a.head);
-		ft_swap(&a, "sa\n");
+		printf("\nB: \n");
+		ft_print_dll(b.head);
+		//pb pb ra ra pb pb rra pb rra pb sb pa pa rb pa pa pa pa
+		ft_pb(&a, &b, 1);
+		ft_pb(&a, &b, 1);
+		ft_ra(&a, 1);
+		ft_ra(&a, 1);
+		ft_pb(&a, &b, 1);
+		ft_pb(&a, &b, 1);
+		ft_rra(&a, 1);
+		ft_pb(&a, &b, 1);
+		ft_rra(&a, 1);
+		ft_pb(&a, &b, 1);
+		ft_sb(&b, 1);
+		ft_pa(&a, &b, 1);
+		ft_pa(&a, &b, 1);
+		ft_rb(&b, 1);
+		ft_pa(&a, &b, 1);
+		ft_pa(&a, &b, 1);
+		ft_pa(&a, &b, 1);
+		ft_pa(&a, &b, 1);
+		printf("A: \n");
 		ft_print_dll(a.head);
+		printf("\nB: \n");
+		ft_print_dll(b.head);
 	}
 }

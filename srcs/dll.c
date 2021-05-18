@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:32:05 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/18 12:46:25 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/18 14:37:30 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_insert_after_head(t_node *head, t_node *node)
 		node->prev->next = node;
 }
 
-void	ft_free_node(t_node *node)
+t_node	*ft_free_node(t_node *node)
 {
 	t_node	*tmp;
 
@@ -70,18 +70,27 @@ void	ft_free_node(t_node *node)
 		node->next->prev = node->prev;
 		node = node->next;
 	}
+	else
+		node = NULL;
 	free(tmp);
+	return (node);
 }
 
 void	ft_print_dll(t_node *head)
 {
 	t_node *tmp;
 
-	tmp = head->next;
-	printf("%d\n", head->val);
-	while (tmp != head)
+	if (head)
 	{
-		printf("%d\n", tmp->val);
-		tmp = tmp->next;
+		printf("%d\n", head->val);
+		if (head->next)
+		{
+			tmp = head->next;
+			while (tmp != head)
+			{
+				printf("%d\n", tmp->val);
+				tmp = tmp->next;
+			}
+		}
 	}
 }

@@ -6,14 +6,14 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:32:05 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/18 14:37:30 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/19 10:42:42 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-t_node	*ft_create_node(int num, int first_node)
+t_node	*ft_create_node(int num)
 {
 	t_node	*node;
 
@@ -21,16 +21,8 @@ t_node	*ft_create_node(int num, int first_node)
 	if (!node)
 		return (NULL);
 	node->val = num;
-	if (first_node)
-	{
-		node->next = node;
-		node->prev = node;
-	}
-	else
-	{
-		node->next = NULL;
-		node->prev = NULL;
-	}
+	node->next = node;
+	node->prev = node;
 	return (node);
 }
 
@@ -63,9 +55,9 @@ t_node	*ft_free_node(t_node *node)
 	t_node	*tmp;
 
 	tmp = node;
-	if (node->prev)
+	if (node->prev && node->prev != node)
 		node->prev->next = node->next;
-	if (node->next)
+	if (node->next && node->next != node)
 	{
 		node->next->prev = node->prev;
 		node = node->next;

@@ -6,54 +6,59 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:29:57 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/18 15:57:34 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/19 10:15:48 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sa(t_stack *a, int print)
+void	ft_sa(t_frame *f)
 {
 	int	tmp;
 
-	if (!a)
+	if (!f->a->head)
 		return ;
-	tmp = a->head->val;
-	if (a->head->next)
+	if (f->a->head->next)
 	{
-		a->head->val = a->head->next->val;
-		a->head->next->val = tmp;
-		if (print)
+		tmp = f->a->head->val;
+		f->a->head->val = f->a->head->next->val;
+		f->a->head->next->val = tmp;
+		if (f->print)
 			write(1, "sa\n", 3);
 	}
 }
 
-void	ft_sb(t_stack *b, int print)
+void	ft_sb(t_frame *f)
 {
 	int	tmp;
 
-	if (!b)
+	if (!f->b->head)
 		return ;
-	tmp = b->head->val;
-	if (b->head->next)
+	if (f->b->head->next)
 	{
-		b->head->val = b->head->next->val;
-		b->head->next->val = tmp;
-		if (print)
+		tmp = f->b->head->val;
+		f->b->head->val = f->b->head->next->val;
+		f->b->head->next->val = tmp;
+		if (f->print)
 			write(1, "sb\n", 3);
 	}
 }
 
-void	ft_ss(t_stack *a, t_stack *b, int to_print)
+void	ft_ss(t_frame *f)
 {
 	int	tmp;
 
-	tmp = a->head->val;
-	a->head->val = a->head->next->val;
-	a->head->next->val = tmp;
-	tmp = b->head->val;
-	b->head->val = b->head->next->val;
-	b->head->next->val = tmp;
-	if (to_print)
-		write(1, "ss\n", 1);
+	if (!f->a->head || !f->b->head)
+		return ;
+	if (f->a->head->next && f->b->head->next)
+	{
+		tmp = f->a->head->val;
+		f->a->head->val = f->a->head->next->val;
+		f->a->head->next->val = tmp;
+		tmp = f->b->head->val;
+		f->b->head->val = f->b->head->next->val;
+		f->b->head->next->val = tmp;
+		if (f->print)
+			write(1, "ss\n", 1);
+	}
 }

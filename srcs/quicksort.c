@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:30:42 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/18 11:33:52 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/19 14:17:51 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int	ft_get_midpoint(t_node *head, size_t len)
 		i++;
 		head = head->next;
 	}
-	ft_quicksort_recursive(array, 0, i - 1);
-	midpoint = array[i / 2];
+	ft_quicksort_recursive(array, 0, len - 1);
+	midpoint = array[len / 2];
 	free(array);
 	return (midpoint);
 }

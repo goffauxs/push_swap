@@ -6,36 +6,40 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 14:14:06 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/18 14:17:26 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/19 10:13:31 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_rra(t_stack *a, int print)
+void	ft_rra(t_frame *f)
 {
-	if (!a->head)
+	if (!f->a->head)
 		return ;
-	if (a->head->prev)
-		a->head = a->head->prev;
-	if (print)
+	if (f->a->head->prev)
+		f->a->head = f->a->head->prev;
+	if (f->print)
 		write(1, "rra\n", 4);
 }
 
-void	ft_rrb(t_stack *b, int print)
+void	ft_rrb(t_frame *f)
 {
-	if (!b->head)
+	if (!f->b->head)
 		return ;
-	if (b->head->prev)
-		b->head = b->head->prev;
-	if (print)
+	if (f->b->head->prev)
+		f->b->head = f->b->head->prev;
+	if (f->print)
 		write(1, "rra\n", 4);
 }
 
-void	ft_rrr(t_stack *a, t_stack *b, int to_print)
+void	ft_rrr(t_frame *f)
 {
-	ft_rra(a, 0);
-	ft_rrb(b, 0);
-	if (to_print)
+	if (!f->a->head || !f->b->head)
+		return ;
+	if (f->a->head->prev)
+		f->a->head = f->a->head->prev;
+	if (f->b->head->prev)
+		f->b->head = f->b->head->prev;
+	if (f->print)
 		write(1, "rrr\n", 4);
 }

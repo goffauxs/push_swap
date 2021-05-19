@@ -6,48 +6,48 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:36:55 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/18 16:00:29 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/19 10:12:48 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_pa(t_stack *a, t_stack *b, int print)
+void	ft_pa(t_frame *f)
 {
 	int	tmp;
 	
-	if (b->head)
+	if (f->b->head)
 	{
-		tmp = b->head->val;
-		b->head = ft_free_node(b->head);
-		if (!a->head)
-			a->head = ft_create_node(tmp, 1);
+		tmp = f->b->head->val;
+		f->b->head = ft_free_node(f->b->head);
+		if (!f->a->head)
+			f->a->head = ft_create_node(tmp);
 		else
-			ft_insert_before_head(a->head, ft_create_node(tmp, 0));
-		a->head = a->head->prev;
-		b->len--;
-		a->len++;
-		if (print)
+			ft_insert_before_head(f->a->head, ft_create_node(tmp));
+		f->a->head = f->a->head->prev;
+		f->b->len--;
+		f->a->len++;
+		if (f->print)
 			write(1, "pa\n", 3);
 	}
 }
 
-void	ft_pb(t_stack *a, t_stack *b, int print)
+void	ft_pb(t_frame *f)
 {
 	int	tmp;
 	
-	if (a->head)
+	if (f->a->head)
 	{
-		tmp = a->head->val;
-		a->head = ft_free_node(a->head);
-		if (!b->head)
-			b->head = ft_create_node(tmp, 1);
+		tmp = f->a->head->val;
+		f->a->head = ft_free_node(f->a->head);
+		if (!f->b->head)
+			f->b->head = ft_create_node(tmp);
 		else
-			ft_insert_before_head(b->head, ft_create_node(tmp, 0));
-		b->head = b->head->prev;
-		a->len--;
-		b->len++;
-		if (print)
+			ft_insert_before_head(f->b->head, ft_create_node(tmp));
+		f->b->head = f->b->head->prev;
+		f->a->len--;
+		f->b->len++;
+		if (f->print)
 			write(1, "pb\n", 3);
 	}
 }

@@ -6,12 +6,11 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:12:13 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/19 14:46:54 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/20 14:58:35 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 int		ft_get_direction(t_frame *f, int midpoint)
 {

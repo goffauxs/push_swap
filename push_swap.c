@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:31:06 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/19 15:15:43 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:21:58 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,23 @@ static void	ft_init_frame(t_frame *f)
 int main(int argc, char *argv[])
 {
 	t_frame f;
+	int		*chunks;
+	int		operations;
+	int		chunk_count;
 
 	if (argc >= 2)
 	{
+		chunk_count = 0;
+		operations = argc - 1;
+		while (operations > 2)
+		{
+			chunk_count++;
+			operations /= 2;
+		}
+		chunks = malloc(sizeof(int) * chunk_count);
+		if (!chunks)
+			return (0);
+		printf("chunks: %d\n", chunk_count);
 		ft_init_frame(&f);
 		f.b->head = NULL;
 		f.b->len = 0;
@@ -54,12 +68,17 @@ int main(int argc, char *argv[])
 		printf("\nB: \n\n");
 		ft_print_dll(f.b->head);
 		//printf("%d\n", ft_get_midpoint(f.a->head, f.a->len));
-		ft_sort_pb(&f, 0, 0);
-		//ft_sort_pa(&f);
+		ft_sort_pb(&f, 0, 0, chunks);
+		// ft_sort_pa(&f, 0, chunks, chunk_count - 1);
+
+		// for (int i=chunk_count-1; i >= 0; i--)
+		// 	printf("chunks[%d] = %d\n", i, chunks[i]);
+
 		printf("\nA: \n");
 		ft_print_dll(f.a->head);
 		printf("\nB: \n");
 		ft_print_dll(f.b->head);
+		free(chunks);
 	}
-	//system("leaks a.out");
+	system("leaks a.out");
 }

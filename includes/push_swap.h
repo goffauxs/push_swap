@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 10:20:55 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/20 14:53:40 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/26 16:43:53 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct	s_stack
 {
 	t_node	*head;
 	size_t	len;
+	size_t	*chunks;
+	size_t	chunk_count;
 }				t_stack;
 
 typedef struct	s_frame
@@ -53,7 +55,8 @@ void	ft_rrr(t_frame *f);
 void	ft_pa(t_frame *f);
 void	ft_pb(t_frame *f);
 int		ft_get_direction(t_frame *f, int midpoint);
-void	ft_sort_pb(t_frame *f, int midpoint, int pb_counter, int *chunks);
+void	ft_sort_first_pb(t_frame *f, int midpoint, size_t pb_counter);
 void	ft_sort_pa(t_frame *f, int midpoint, int *chunks, int chunk_count);
+int		ft_sorted(t_node *n, size_t len, int ascending);
 
 #endif

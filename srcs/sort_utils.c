@@ -6,11 +6,12 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:12:13 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/20 14:58:35 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/05/26 12:13:48 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 int		ft_get_direction(t_frame *f, int midpoint)
 {
@@ -32,4 +33,19 @@ int		ft_get_direction(t_frame *f, int midpoint)
 	if (node_front->val < midpoint)
 		return (i);
 	return (-i);
+}
+
+int		ft_sorted(t_node *n, size_t len, int ascending)
+{
+	t_node	*tmp;
+	
+	tmp = n;
+	while (--len)
+	{
+		if ((ascending && tmp->val > tmp->next->val)
+			|| (!ascending && tmp->val < tmp->next->val))
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:30:42 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/19 14:17:51 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/06/07 14:13:56 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,47 @@ static void	ft_quicksort_recursive(int array[], int low, int high)
 	}
 }
 
-int	ft_get_midpoint(t_node *head, size_t len)
+static void	ft_replace_indices(t_node *head, int *array, size_t len)
 {
-	int		*array;
 	size_t	i;
-	int		midpoint;
+	size_t	j;
 
 	i = 0;
-	array = malloc(sizeof(int) * len);
-	if (!array)
-		return (0);
 	while (i < len)
+	{
+		j = 0;
+		while (j < len)
+		{
+			if (head->val == array[j])
+			{
+				head->val = j;
+				break ;
+			}
+			j++;
+		}
+		i++;
+		head = head->next;
+	}
+}
+
+void	ft_quicksort_stack(t_stack *a)
+{
+	size_t	i;
+	int		*array;
+	t_node	*head;
+
+	i = 0;
+	head = a->head;
+	array = malloc(sizeof(int) * a->len);
+	if (!array)
+		return ;
+	while (i < a->len)
 	{
 		array[i] = head->val;
 		i++;
 		head = head->next;
 	}
-	ft_quicksort_recursive(array, 0, len - 1);
-	midpoint = array[len / 2];
+	ft_quicksort_recursive(array, 0, a->len - 1);
+	ft_replace_indices(head, array, a->len);
 	free(array);
-	return (midpoint);
 }

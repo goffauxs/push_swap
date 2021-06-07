@@ -6,68 +6,35 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 14:45:52 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/26 16:42:09 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/06/07 14:17:29 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
-void	ft_sort_first_pb(t_frame *f, int midpoint, size_t pb_counter)
+void	ft_radix_sort(t_frame *f, size_t size, size_t max_num, size_t max_bits)
 {
-	int	direction;
-	int	i;
-	
+	size_t	i;
+	size_t	j;
+	int		num;
+
 	i = 0;
-	while (f->a->len > 2)
+	while ((max_num >> max_bits) != 0)
+		++max_bits;
+	while (i < max_bits)
 	{
-		if (!pb_counter)
+		j = 0;
+		while (j < size)
 		{
-			pb_counter = (f->a->len / 2);
-			midpoint = ft_get_midpoint(f->a->head, f->a->len);
-			f->b->chunks[i++] = pb_counter;
-		}
-		while (f->a->head->val < midpoint)
-		{
-			ft_pb(f);
-			pb_counter--;
-		}
-		direction = ft_get_direction(f, midpoint);
-		if (direction < 0)
-			while (direction++)
-				ft_rra(f);
-		else if (direction > 0)
-			while (direction--)
+			num = f->a->head->val;
+			if ((num >> i) & 1)
 				ft_ra(f);
-	}
-}
-
-void	ft_sort_pa(t_frame *f, int midpoint, int *chunks, int chunk_count)
-{
-	int	rb_counter;
-	int	pa_counter;
-
-	while (chunk_count >= 0)
-	{
-		rb_counter = 0;
-		pa_counter = 0;
-		midpoint = ft_get_midpoint(f->b->head, chunks[chunk_count]);
-		while (chunks[chunk_count] > 0)
-		{
-			if (f->b->head->val >= midpoint)
-			{
-				ft_pa(f);
-				pa_counter++;
-				chunks[chunk_count] -= 1;
-			}
 			else
-			{
-				ft_rb(f);
-				rb_counter++;
-			}
+				ft_pb(f);
+			j++;
 		}
-		while (rb_counter--)
-			ft_rrb(f);
-		chunk_count--;
+		while (f->b->len != 0)
+			ft_pa(f);
+		i++;
 	}
 }

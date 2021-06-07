@@ -6,12 +6,11 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:32:05 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/19 10:42:42 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/06/07 14:19:48 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 t_node	*ft_create_node(int num)
 {
@@ -26,7 +25,7 @@ t_node	*ft_create_node(int num)
 	return (node);
 }
 
-void	ft_insert_before_head(t_node *head, t_node *node)
+void	ft_insert_before(t_node *head, t_node *node)
 {
 	if (!head || !node)
 		return ;
@@ -38,7 +37,7 @@ void	ft_insert_before_head(t_node *head, t_node *node)
 		node->prev->next = node;
 }
 
-void	ft_insert_after_head(t_node *head, t_node *node)
+void	ft_insert_after(t_node *head, t_node *node)
 {
 	if (!head || !node)
 		return ;
@@ -68,9 +67,10 @@ t_node	*ft_free_node(t_node *node)
 	return (node);
 }
 
+/*
 void	ft_print_dll(t_node *head)
 {
-	t_node *tmp;
+	t_node	*tmp;
 
 	if (head)
 	{
@@ -86,3 +86,4 @@ void	ft_print_dll(t_node *head)
 		}
 	}
 }
+*/

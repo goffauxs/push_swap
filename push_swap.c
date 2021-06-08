@@ -6,11 +6,12 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:31:06 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/06/08 12:22:45 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/06/08 16:39:22 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 static void	ft_init_frame(t_frame *f)
 {
@@ -27,9 +28,10 @@ static void	ft_init_frame(t_frame *f)
 	f->print = 1;
 }
 
-static int ft_treat_errors(int argc, char *argv[])
+static int	ft_treat_errors(int argc, char *argv[])
 {
 	int	i;
+
 	if (argc < 2)
 		return (0);
 	else
@@ -91,17 +93,18 @@ static void	ft_treat_valid(t_frame *f, int argc, char *argv[])
 	}
 	if (ft_check_duplicate(f->a->head, f->a->len))
 	{
-		if (ft_sorted(f->a->head, f->a->len))
-			return ;
-		else
+		ft_sorted_offset(f);
+		if (!ft_sorted(f->a->head, f->a->len, 1))
 		{
-			if (f->a->len <= 3)
+			ft_quicksort_stack(f->a);
+			if (f->a->len == 3)
 				ft_solve3(f);
+			else if (f->a->len == 2 && !ft_sorted(f->a->head, 2, 1))
+				ft_sa(f);
+			else if (f->a->len <= 5)
+				ft_solve5(f);
 			else
-			{
-				ft_quicksort_stack(f->a);
 				ft_radix_sort(f, f->a->len, f->a->len - 1, 0);
-			}
 		}
 	}
 }

@@ -6,7 +6,7 @@
 #    By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/07 14:59:23 by sgoffaux          #+#    #+#              #
-#    Updated: 2021/06/08 12:21:26 by sgoffaux         ###   ########.fr        #
+#    Updated: 2021/06/08 13:35:28 by sgoffaux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS	=	push_swap.c \
 			srcs/ft_swap.c \
 			srcs/quicksort.c \
 			srcs/ft_solve_3.c \
+			srcs/ft_solve_5.c \
 
 OBJS	=	$(SRCS:%.c=%.o)
 

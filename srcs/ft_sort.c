@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 14:45:52 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/06/07 14:17:29 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/06/07 15:42:47 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,18 @@ void	ft_radix_sort(t_frame *f, size_t size, size_t max_num, size_t max_bits)
 			ft_pa(f);
 		i++;
 	}
+}
+
+int	ft_sorted(t_node *n, size_t len)
+{
+	t_node *tmp;
+
+	tmp = n;
+	while (--len)
+	{
+		if (tmp->val > tmp->next->val)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
 }

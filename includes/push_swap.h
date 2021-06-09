@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 10:20:55 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/06/08 16:37:57 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/06/09 11:38:37 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 # include <stddef.h>
 # include "../libft/libft.h"
+# include "../get_next_line/get_next_line.h"
 
 typedef struct s_node
 {
@@ -35,11 +36,22 @@ typedef struct s_frame
 	int		print;
 }				t_frame;
 
+typedef void (*t_func)(t_frame *f);
+
+typedef struct s_operation
+{
+	const char	*cmd;
+	t_func		func;
+}				t_operation;
+
 t_node	*ft_create_node(int num);
 void	ft_insert_after(t_node *head, t_node *node);
 void	ft_insert_before(t_node *head, t_node *node);
 t_node	*ft_free_node(t_node *node);
 void	ft_print_dll(t_node *head);
+int		ft_treat_errors(int argc, char *argv[]);
+int		ft_check_duplicate(t_node *n, size_t len);
+void	ft_init_frame(t_frame *f);
 void	ft_sa(t_frame *f);
 void	ft_sb(t_frame *f);
 void	ft_ss(t_frame *f);

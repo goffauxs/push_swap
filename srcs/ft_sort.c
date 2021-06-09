@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 14:45:52 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/06/08 16:48:51 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/06/09 10:05:42 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_radix_sort(t_frame *f, size_t size, size_t max_num, size_t max_bits)
 	{
 		j = 0;
 		while (j < size && !(ft_sorted(f->a->head, f->a->len, 1)
-			&& ft_sorted(f->b->head, f->b->len, 0)))
+				&& ft_sorted(f->b->head, f->b->len, 0)))
 		{
 			num = f->a->head->val;
 			if ((num >> i) & 1)

@@ -6,11 +6,12 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:32:05 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/06/07 14:19:48 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/06/09 11:28:13 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 t_node	*ft_create_node(int num)
 {
@@ -67,7 +68,7 @@ t_node	*ft_free_node(t_node *node)
 	return (node);
 }
 
-/*
+
 void	ft_print_dll(t_node *head)
 {
 	t_node	*tmp;
@@ -86,4 +87,3 @@ void	ft_print_dll(t_node *head)
 		}
 	}
 }
-*/

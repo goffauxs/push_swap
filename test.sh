@@ -8,4 +8,4 @@ fi
 LIST=$(perl -e "use List::Util 'shuffle'; my @out = (shuffle 0..$1)[0..$1]; print \"@out\"")
 echo "LIST = "${LIST[@]}
 set -v
-./push_swap ${LIST[@]} | wc -l
+./push_swap ${LIST[@]} | ./checker ${LIST[@]}

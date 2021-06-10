@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 10:20:55 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/06/09 11:38:37 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/06/10 13:20:50 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_node
 	struct s_node	*prev;
 	struct s_node	*next;
 	int				val;
+	int				keep;
 }				t_node;
 
 typedef struct s_stack
@@ -36,19 +37,18 @@ typedef struct s_frame
 	int		print;
 }				t_frame;
 
-typedef void (*t_func)(t_frame *f);
+typedef void	(*t_func)(t_frame *f);
 
-typedef struct s_operation
+typedef struct s_ops
 {
 	const char	*cmd;
 	t_func		func;
-}				t_operation;
+}				t_ops;
 
 t_node	*ft_create_node(int num);
 void	ft_insert_after(t_node *head, t_node *node);
 void	ft_insert_before(t_node *head, t_node *node);
 t_node	*ft_free_node(t_node *node);
-void	ft_print_dll(t_node *head);
 int		ft_treat_errors(int argc, char *argv[]);
 int		ft_check_duplicate(t_node *n, size_t len);
 void	ft_init_frame(t_frame *f);
@@ -70,5 +70,11 @@ void	ft_solve5(t_frame *f);
 int		ft_sorted(t_node *n, size_t len, int ascending);
 void	ft_sorted_offset(t_frame *f);
 void	ft_rotate(t_frame *f, int target, int max);
+
+void	ft_markup_greater(t_node *m_head);
+void	ft_markup_index(t_node *m_head);
+void	ft_sort_markup(t_frame *f);
+
+void	ft_print_dll(t_frame *f);
 
 #endif

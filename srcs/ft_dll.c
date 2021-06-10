@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll.c                                              :+:      :+:    :+:   */
+/*   ft_dll.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:32:05 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/06/09 11:28:13 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/06/10 13:22:40 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_node	*ft_create_node(int num)
 	node->val = num;
 	node->next = node;
 	node->prev = node;
+	node->keep = 0;
 	return (node);
 }
 
@@ -68,22 +69,34 @@ t_node	*ft_free_node(t_node *node)
 	return (node);
 }
 
-
-void	ft_print_dll(t_node *head)
+void	ft_print_dll(t_frame *f)
 {
-	t_node	*tmp;
+	size_t max_len;
 
-	if (head)
+	max_len = f->a->len;
+	if (f->b->len > max_len)
+		max_len = f->b->len;
+	printf("\n A\t B\n -\t -\n");
+	while (max_len--)
 	{
-		printf("%d\n", head->val);
-		if (head->next)
+		int a_val = -1;
+		int b_val = -1;
+		if (f->a->len > max_len)
 		{
-			tmp = head->next;
-			while (tmp != head)
-			{
-				printf("%d\n", tmp->val);
-				tmp = tmp->next;
-			}
+			a_val = f->a->head->val;
+			f->a->head = f->a->head->next;
 		}
+		if (f->b->len > max_len)
+		{
+			b_val = f->b->head->val;
+			f->b->head = f->b->head->next;
+		}
+		if (a_val >= 0 && b_val >= 0)
+			printf("%2d\t%2d\n", a_val, b_val);
+		else if (a_val >= 0 && b_val == -1)
+			printf("%2d\n", a_val);
+		else if (b_val >= 0 && a_val == -1)
+			printf("  \t%2d\n", b_val);
 	}
+	printf("\n");
 }

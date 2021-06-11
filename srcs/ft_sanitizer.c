@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sanitizer.c                                        :+:      :+:    :+:   */
+/*   ft_sanitizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 10:16:17 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/06/09 10:21:20 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/06/11 16:01:14 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	ft_init_frame(t_frame *f)
 {
-	f->a = malloc(sizeof(t_stack *));
+	f->a = malloc(sizeof(t_stack));
 	if (!f->a)
 		return ;
-	f->b = malloc(sizeof(t_stack *));
+	f->b = malloc(sizeof(t_stack));
 	if (!f->b)
 		return ;
 	f->a->head = NULL;
@@ -25,6 +25,18 @@ void	ft_init_frame(t_frame *f)
 	f->b->head = NULL;
 	f->b->len = 0;
 	f->print = 1;
+}
+
+int	ft_fill_stack(t_frame *f, int argc, char *argv[])
+{
+	if (argc < 2)
+		return (0);
+	ft_init_frame(f);
+	f->a->head = ft_create_node(ft_atoi(argv[1]));
+	f->a->len = argc - 1;
+	while (--argc > 1)
+		ft_insert_after(f->a->head, ft_create_node(ft_atoi(argv[argc])));
+	return (1);
 }
 
 int	ft_check_duplicate(t_node *n, size_t len)
@@ -44,7 +56,6 @@ int	ft_check_duplicate(t_node *n, size_t len)
 		{
 			if (comp->val == tmp->val && comp != tmp)
 			{
-				write(1, "Error\n", 6);
 				return (0);
 			}
 			j++;
@@ -60,9 +71,7 @@ int	ft_treat_errors(int argc, char *argv[])
 {
 	int	i;
 
-	if (argc < 2)
-		return (0);
-	else
+	if (argc >= 2)
 	{
 		while (argc-- > 1)
 		{

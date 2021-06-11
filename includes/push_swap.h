@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 10:20:55 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/06/09 11:38:37 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/06/11 16:01:21 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ typedef struct s_frame
 
 typedef void (*t_func)(t_frame *f);
 
-typedef struct s_operation
+typedef struct s_ops
 {
 	const char	*cmd;
 	t_func		func;
-}				t_operation;
+}				t_ops;
 
 t_node	*ft_create_node(int num);
 void	ft_insert_after(t_node *head, t_node *node);
@@ -52,6 +52,7 @@ void	ft_print_dll(t_node *head);
 int		ft_treat_errors(int argc, char *argv[]);
 int		ft_check_duplicate(t_node *n, size_t len);
 void	ft_init_frame(t_frame *f);
+int		ft_fill_stack(t_frame *f, int argc, char *argv[]);
 void	ft_sa(t_frame *f);
 void	ft_sb(t_frame *f);
 void	ft_ss(t_frame *f);

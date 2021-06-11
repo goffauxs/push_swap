@@ -6,14 +6,13 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 10:13:15 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/06/09 11:41:15 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/06/11 16:09:03 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
-static void	ft_init_funcs(t_operation *opps)
+static void	ft_init_funcs(t_ops *opps)
 {
 	opps[0].cmd = "sa";
 	opps[0].func = &ft_sa;
@@ -39,38 +38,56 @@ static void	ft_init_funcs(t_operation *opps)
 	opps[10].func = &ft_rrr;
 }
 
-static void	ft_check_valid(t_frame *f, int argc, char *argv[])
+static int	ft_check_valid(t_frame *f, t_ops *opps)
 {
-	ft_init_frame(f);
-	f->a->head = ft_create_node(ft_atoi(argv[1]));
-	f->a->len = 1;
-	while (--argc > 1)
+	int			i;
+	int			ret;
+	char		*line;
+
+	if (ft_check_duplicate(f->a->head, f->a->len))
 	{
-		ft_insert_after(f->a->head, ft_create_node(ft_atoi(argv[argc])));
-		f->a->len++;
+		ret = 1;
+		while (ret && ret != -1)
+		{
+			i = 0;
+			ret = get_next_line(0, &line);
+			if (ret == 0)
+				break ;
+			while (ft_strncmp(line, opps[i].cmd, ft_strlen(line)))
+				i++;
+			if (i < 11)
+				opps[i].func(f);
+		}
 	}
+	else
+	{
+		write(1, "Error\n", 6);
+		return (0);
+	}
+	return (1);
 }
 
 int	main(int argc, char *argv[])
 {
-	int			i;
-	char		*line;
-	int			ret;
-	t_frame		f;
-	t_operation	opps[11];
+	t_frame	f;
+	t_ops	opps[11];
 
 	ft_init_funcs(opps);
-	i = 0;
 	if (ft_treat_errors(argc, argv))
-		ft_check_valid(&f, argc, argv);
-	ret = 1;
-	while (ret && ret != -1)
 	{
-		ret = get_next_line(0, &line);
-		while (ft_strncmp(line, opps[i].cmd, 2))
-			i++;
-		opps[i].func(&f);
+		if (ft_fill_stack(&f, argc, argv))
+		{
+			f.print = 0;
+			if (ft_check_valid(&f, opps))
+			{
+				if (ft_sorted(f.a->head, f.a->len, 1))
+					write(1, "OK\n", 3);
+				else
+					write(1, "KO\n", 3);
+			}
+		}
 	}
-	ft_print_dll(f.a->head);
+	else
+		write(2, "Error\n", 6);
 	return (0);
 }

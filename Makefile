@@ -6,7 +6,7 @@
 #    By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/07 14:59:23 by sgoffaux          #+#    #+#              #
-#    Updated: 2021/06/09 12:47:04 by sgoffaux         ###   ########.fr        #
+#    Updated: 2021/06/11 16:17:56 by sgoffaux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ S_SRCS		=	srcs/ft_dll.c \
 P_SRCS		=	push_swap.c \
 				srcs/ft_quicksort.c \
 				srcs/ft_solve_3.c \
-				srcs/ft_solve_5.c
+				srcs/ft_solve_5.c \
 
 C_SRCS		=	checker.c
 
@@ -47,30 +47,47 @@ OBJS		=	$(S_OBJS) $(P_OBJS) $(C_OBJS)
 all:			$(NAME)
 
 $(PUSH_SWAP):	$(S_OBJS) $(P_OBJS) $(LIBFT_A)
-				$(CC) $(CFLAGS) -L. -lft $(S_OBJS) $(P_OBJS) -o push_swap
+				@$(CC) $(CFLAGS) -L. -lft $(S_OBJS) $(P_OBJS) -o push_swap
+				@echo "Linked into executable \033[0;32mpush_swap\033[0m."
 
 $(CHECKER):		$(S_OBJS) $(C_OBJS) $(LIBFT_A) $(GNL_A)
-				$(CC) $(CFLAGS) -L. -lft -lgnl $(S_OBJS) $(C_OBJS) -o checker
+				@$(CC) $(CFLAGS) -L. -lft -lgnl $(S_OBJS) $(C_OBJS) -o checker
+				@echo "Linked into executable \033[0;32mchecker\033[0m."
 
 $(LIBFT_A):	
-				$(MAKE) -C $(LIBFT)
-				cp -p $(addprefix $(LIBFT), $(LIBFT_A)) $(LIBFT_A)
+				@$(MAKE) -s -C $(LIBFT)
+				@echo "Compiled libft.a."
+				@cp -p $(addprefix $(LIBFT), $(LIBFT_A)) $(LIBFT_A)
 
 $(GNL_A):	
-				$(MAKE) -C $(GNL)
-				cp -p $(addprefix $(GNL), $(GNL_A)) $(GNL_A)
+				@$(MAKE) -s -C $(GNL)
+				@echo "Compiled libgnl.a."
+				@cp -p $(addprefix $(GNL), $(GNL_A)) $(GNL_A)
 
-clean:
-				$(MAKE) clean -C $(LIBFT)
-				$(MAKE) clean -C $(GNL)
-				$(RM) $(OBJS)
+.c.o:
+				@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+				@echo "Compiling $<."
 
-fclean:			clean
-				$(MAKE) fclean -C $(LIBFT)
-				$(MAKE) fclean -C $(GNL)
-				$(RM) libft.a
-				$(RM) libgnl.a
-				$(RM) $(NAME)
+localclean:
+				@$(RM) $(OBJS)
+				@echo "Removed object files."
+
+clean:			localclean
+				@$(MAKE) clean -s -C $(LIBFT)
+				@echo "Clean libft."
+				@$(MAKE) clean -s -C$(GNL)
+				@echo "Clean gnl."
+
+fclean:			localclean
+				@$(MAKE) fclean -s -C $(LIBFT)
+				@echo "Full clean libft."
+				@$(MAKE) fclean -s -C $(GNL)
+				@echo "Full clean gnl."
+				@$(RM) $(LIBFT_A)
+				@$(RM) $(GNL_A)
+				@echo "Removed libs."
+				@$(RM) $(NAME)
+				@echo "Removed executables."
 
 re:				fclean all
 

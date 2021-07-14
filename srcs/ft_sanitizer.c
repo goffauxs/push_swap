@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 10:16:17 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/06/11 16:01:14 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/07/14 13:30:14 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ int	ft_treat_errors(int argc, char *argv[])
 			i = 0;
 			while (argv[argc][i])
 			{
-				if (!ft_isdigit(*argv[argc]) && *argv[argc] != '-')
+				if (!(ft_isdigit(*argv[argc])
+						|| (*argv[argc] == '-' && ft_isdigit(argv[argc][1]))))
 					return (0);
 				i++;
 			}

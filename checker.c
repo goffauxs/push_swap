@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 10:13:15 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/06/11 16:09:03 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/07/14 13:25:41 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,25 @@ static void	ft_init_funcs(t_ops *opps)
 static int	ft_check_valid(t_frame *f, t_ops *opps)
 {
 	int			i;
-	int			ret;
 	char		*line;
 
 	if (ft_check_duplicate(f->a->head, f->a->len))
 	{
-		ret = 1;
-		while (ret && ret != -1)
+		while (get_next_line(STDIN_FILENO, &line) > 0)
 		{
-			i = 0;
-			ret = get_next_line(0, &line);
-			if (ret == 0)
-				break ;
-			while (ft_strncmp(line, opps[i].cmd, ft_strlen(line)))
-				i++;
+			i = -1;
+			while (++i < 11)
+				if (ft_strlen(line) == ft_strlen(opps[i].cmd)
+					&& !ft_strncmp(line, opps[i].cmd, ft_strlen(opps[i].cmd)))
+					break ;
+			if (i >= 11)
+				return (0);
 			if (i < 11)
 				opps[i].func(f);
 		}
 	}
 	else
-	{
-		write(1, "Error\n", 6);
 		return (0);
-	}
 	return (1);
 }
 
@@ -81,13 +77,15 @@ int	main(int argc, char *argv[])
 			if (ft_check_valid(&f, opps))
 			{
 				if (ft_sorted(f.a->head, f.a->len, 1))
-					write(1, "OK\n", 3);
+					write(STDOUT_FILENO, "OK\n", 3);
 				else
-					write(1, "KO\n", 3);
+					write(STDOUT_FILENO, "KO\n", 3);
 			}
+			else
+				write(STDERR_FILENO, "Error\n", 6);
 		}
 	}
 	else
-		write(2, "Error\n", 6);
+		write(STDERR_FILENO, "Error\n", 6);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:31:06 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/06/11 16:04:11 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/07/14 13:31:15 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	ft_treat_valid(t_frame *f)
 		}
 	}
 	else
-		write(1, "Error\n", 6);
+		write(STDERR_FILENO, "Error\n", 6);
 }
 
 int	main(int argc, char *argv[])
@@ -42,6 +42,6 @@ int	main(int argc, char *argv[])
 			ft_treat_valid(&f);
 	}
 	else
-		write(1, "Error\n", 6);
+		write(STDERR_FILENO, "Error\n", 6);
 	return (0);
 }

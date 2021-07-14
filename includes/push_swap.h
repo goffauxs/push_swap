@@ -6,15 +6,15 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 10:20:55 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/07/14 13:26:07 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/07/14 13:52:51 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include <stddef.h>
-# include "../libft/libft.h"
-# include "../get_next_line/get_next_line.h"
+# include "libft.h"
+# include "get_next_line.h"
 
 typedef struct s_node
 {

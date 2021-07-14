@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 10:13:15 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/07/14 13:25:41 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/07/14 13:50:35 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,15 @@ int	main(int argc, char *argv[])
 			if (ft_check_valid(&f, opps))
 			{
 				if (ft_sorted(f.a->head, f.a->len, 1))
-					write(STDOUT_FILENO, "OK\n", 3);
+					ft_putendl_fd("OK", STDOUT_FILENO);
 				else
-					write(STDOUT_FILENO, "KO\n", 3);
+					ft_putendl_fd("KO", STDOUT_FILENO);
 			}
 			else
-				write(STDERR_FILENO, "Error\n", 6);
+				ft_putendl_fd("Error", STDERR_FILENO);
 		}
 	}
 	else
-		write(STDERR_FILENO, "Error\n", 6);
+		ft_putendl_fd("Error", STDERR_FILENO);
 	return (0);
 }

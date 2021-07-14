@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:36:55 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/07/14 13:31:43 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/07/14 13:51:08 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_pa(t_frame *f)
 		f->b->len--;
 		f->a->len++;
 		if (f->print)
-			write(STDOUT_FILENO, "pa\n", 3);
+			ft_putendl_fd("pa", STDOUT_FILENO);
 	}
 }
 
@@ -48,6 +48,6 @@ void	ft_pb(t_frame *f)
 		f->a->len--;
 		f->b->len++;
 		if (f->print)
-			write(STDOUT_FILENO, "pb\n", 3);
+			ft_putendl_fd("pb", STDOUT_FILENO);
 	}
 }

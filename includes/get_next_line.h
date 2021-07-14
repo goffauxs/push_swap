@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/30 15:51:21 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/04/12 11:26:34 by sgoffaux         ###   ########.fr       */
+/*   Created: 2021/05/04 11:03:07 by sgoffaux          #+#    #+#             */
+/*   Updated: 2021/07/14 13:25:07 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# include <stdlib.h>
+# include <unistd.h>
 
-void	*ft_memset(void *s, int c, size_t n)
-{
-	size_t			i;
-	unsigned char	*ptr;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
 
-	i = 0;
-	ptr = (unsigned char *)s;
-	while (i < n)
-		ptr[i++] = (unsigned char)c;
-	return (s);
-}
+# ifndef FD_MAX
+#  define FD_MAX 8192
+# endif
+
+int	get_next_line(int fd, char **line);
+
+#endif

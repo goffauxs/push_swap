@@ -6,7 +6,7 @@
 #    By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/07 14:59:23 by sgoffaux          #+#    #+#              #
-#    Updated: 2021/06/11 16:17:56 by sgoffaux         ###   ########.fr        #
+#    Updated: 2021/07/14 13:56:48 by sgoffaux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,11 @@ INCLUDE 	=	includes
 CFLAGS		=	-Wall -Wextra -Werror -I$(INCLUDE)
 RM			=	rm -f
 
-LIBFT		=	libft/
-GNL			=	get_next_line/
+LIBFT_DIR	=	libft/
+GNL_DIR		=	get_next_line/
+
+LIBFT		=	$(addprefix $(LIBFT_DIR), $(LIBFT_A))
+GNL			=	$(addprefix $(GNL_DIR), $(GNL_A))
 
 S_SRCS		=	srcs/ft_dll.c \
 				srcs/ft_push.c \
@@ -46,23 +49,21 @@ OBJS		=	$(S_OBJS) $(P_OBJS) $(C_OBJS)
 
 all:			$(NAME)
 
-$(PUSH_SWAP):	$(S_OBJS) $(P_OBJS) $(LIBFT_A)
-				@$(CC) $(CFLAGS) -L. -lft $(S_OBJS) $(P_OBJS) -o push_swap
+$(PUSH_SWAP):	$(S_OBJS) $(P_OBJS) $(LIBFT)
+				@$(CC) $(CFLAGS) -L$(LIBFT_DIR) -lft $(S_OBJS) $(P_OBJS) -o push_swap
 				@echo "Linked into executable \033[0;32mpush_swap\033[0m."
 
-$(CHECKER):		$(S_OBJS) $(C_OBJS) $(LIBFT_A) $(GNL_A)
-				@$(CC) $(CFLAGS) -L. -lft -lgnl $(S_OBJS) $(C_OBJS) -o checker
+$(CHECKER):		$(S_OBJS) $(C_OBJS) $(LIBFT) $(GNL)
+				@$(CC) $(CFLAGS) -L$(LIBFT_DIR) -lft -L$(GNL_DIR) -lgnl $(S_OBJS) $(C_OBJS) -o checker
 				@echo "Linked into executable \033[0;32mchecker\033[0m."
 
-$(LIBFT_A):	
-				@$(MAKE) -s -C $(LIBFT)
+$(LIBFT):
+				@$(MAKE) -s -C $(LIBFT_DIR)
 				@echo "Compiled libft.a."
-				@cp -p $(addprefix $(LIBFT), $(LIBFT_A)) $(LIBFT_A)
 
-$(GNL_A):	
-				@$(MAKE) -s -C $(GNL)
+$(GNL):
+				@$(MAKE) -s -C $(GNL_DIR)
 				@echo "Compiled libgnl.a."
-				@cp -p $(addprefix $(GNL), $(GNL_A)) $(GNL_A)
 
 .c.o:
 				@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
@@ -73,19 +74,16 @@ localclean:
 				@echo "Removed object files."
 
 clean:			localclean
-				@$(MAKE) clean -s -C $(LIBFT)
+				@$(MAKE) clean -s -C $(LIBFT_DIR)
 				@echo "Clean libft."
-				@$(MAKE) clean -s -C$(GNL)
+				@$(MAKE) clean -s -C$(GNL_DIR)
 				@echo "Clean gnl."
 
 fclean:			localclean
-				@$(MAKE) fclean -s -C $(LIBFT)
+				@$(MAKE) fclean -s -C $(LIBFT_DIR)
 				@echo "Full clean libft."
-				@$(MAKE) fclean -s -C $(GNL)
+				@$(MAKE) fclean -s -C $(GNL_DIR)
 				@echo "Full clean gnl."
-				@$(RM) $(LIBFT_A)
-				@$(RM) $(GNL_A)
-				@echo "Removed libs."
 				@$(RM) $(NAME)
 				@echo "Removed executables."
 

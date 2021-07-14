@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:29:57 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/07/14 13:32:07 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/07/14 13:52:02 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_sa(t_frame *f)
 		f->a->head->val = f->a->head->next->val;
 		f->a->head->next->val = tmp;
 		if (f->print)
-			write(STDOUT_FILENO, "sa\n", 3);
+			ft_putendl_fd("sa", STDOUT_FILENO);
 	}
 }
 
@@ -40,7 +40,7 @@ void	ft_sb(t_frame *f)
 		f->b->head->val = f->b->head->next->val;
 		f->b->head->next->val = tmp;
 		if (f->print)
-			write(STDOUT_FILENO, "sb\n", 3);
+			ft_putendl_fd("sb", STDOUT_FILENO);
 	}
 }
 
@@ -59,6 +59,6 @@ void	ft_ss(t_frame *f)
 		f->b->head->val = f->b->head->next->val;
 		f->b->head->next->val = tmp;
 		if (f->print)
-			write(STDOUT_FILENO, "ss\n", 1);
+			ft_putendl_fd("ss", STDOUT_FILENO);
 	}
 }

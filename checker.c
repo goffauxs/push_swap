@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 10:13:15 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/07/14 13:50:35 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/07/14 15:47:11 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static int	ft_check_valid(t_frame *f, t_ops *opps)
 			if (i < 11)
 				opps[i].func(f);
 		}
+		free(line);
 	}
 	else
 		return (0);

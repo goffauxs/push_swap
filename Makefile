@@ -6,7 +6,7 @@
 #    By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/07 14:59:23 by sgoffaux          #+#    #+#              #
-#    Updated: 2021/07/14 13:56:48 by sgoffaux         ###   ########.fr        #
+#    Updated: 2021/07/26 16:29:04 by sgoffaux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,11 +50,11 @@ OBJS		=	$(S_OBJS) $(P_OBJS) $(C_OBJS)
 all:			$(NAME)
 
 $(PUSH_SWAP):	$(S_OBJS) $(P_OBJS) $(LIBFT)
-				@$(CC) $(CFLAGS) -L$(LIBFT_DIR) -lft $(S_OBJS) $(P_OBJS) -o push_swap
+				@$(CC) $(CFLAGS) $(S_OBJS) $(P_OBJS) -L$(LIBFT_DIR) -lft -o push_swap
 				@echo "Linked into executable \033[0;32mpush_swap\033[0m."
 
 $(CHECKER):		$(S_OBJS) $(C_OBJS) $(LIBFT) $(GNL)
-				@$(CC) $(CFLAGS) -L$(LIBFT_DIR) -lft -L$(GNL_DIR) -lgnl $(S_OBJS) $(C_OBJS) -o checker
+				@$(CC) $(CFLAGS) $(S_OBJS) $(C_OBJS) -L$(LIBFT_DIR) -lft -L$(GNL_DIR) -lgnl -o checker
 				@echo "Linked into executable \033[0;32mchecker\033[0m."
 
 $(LIBFT):

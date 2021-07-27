@@ -6,11 +6,23 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 10:16:17 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/07/14 13:30:14 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/07/27 14:09:16 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_print(char *msg, int fd, t_frame *f)
+{
+	if (msg)
+		ft_putendl_fd(msg, fd);
+	while (f->a->head)
+		f->a->head = ft_free_node(f->a->head);
+	while (f->b->head)
+		f->b->head = ft_free_node(f->b->head);
+	free(f->a);
+	free(f->b);
+}
 
 void	ft_init_frame(t_frame *f)
 {

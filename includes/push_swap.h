@@ -6,13 +6,12 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 10:20:55 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/07/14 13:52:51 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/07/27 14:11:59 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# include <stddef.h>
 # include "libft.h"
 # include "get_next_line.h"
 
@@ -70,5 +69,6 @@ void	ft_solve5(t_frame *f);
 int		ft_sorted(t_node *n, size_t len, int ascending);
 void	ft_sorted_offset(t_frame *f);
 void	ft_rotate(t_frame *f, int target, int max);
+void	ft_print(char *msg, int fd, t_frame *f);
 
 #endif

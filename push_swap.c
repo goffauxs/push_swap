@@ -6,7 +6,7 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:31:06 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/07/14 13:52:18 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/07/27 14:15:32 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ static void	ft_treat_valid(t_frame *f)
 			else
 				ft_radix_sort(f, f->a->len, f->a->len - 1, 0);
 		}
+		ft_print(NULL, 0, f);
 	}
 	else
-		ft_putendl_fd("Error", STDERR_FILENO);
+		ft_print("Error", STDERR_FILENO, f);
 }
 
 int	main(int argc, char *argv[])
@@ -42,6 +43,6 @@ int	main(int argc, char *argv[])
 			ft_treat_valid(&f);
 	}
 	else
-		ft_putendl_fd("Error", STDERR_FILENO);
+		ft_print("Error", STDERR_FILENO, &f);
 	return (0);
 }

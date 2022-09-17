@@ -6,68 +6,108 @@
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 14:45:52 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/26 16:42:09 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/06/09 10:05:42 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
-void	ft_sort_first_pb(t_frame *f, int midpoint, size_t pb_counter)
+void	ft_radix_sort(t_frame *f, size_t size, size_t max_num, size_t max_bits)
 {
-	int	direction;
-	int	i;
-	
+	size_t	i;
+	size_t	j;
+	int		num;
+
 	i = 0;
-	while (f->a->len > 2)
+	while ((max_num >> max_bits) != 0)
+		++max_bits;
+	while (i < max_bits)
 	{
-		if (!pb_counter)
+		j = 0;
+		while (j < size && !(ft_sorted(f->a->head, f->a->len, 1)
+				&& ft_sorted(f->b->head, f->b->len, 0)))
 		{
-			pb_counter = (f->a->len / 2);
-			midpoint = ft_get_midpoint(f->a->head, f->a->len);
-			f->b->chunks[i++] = pb_counter;
+			num = f->a->head->val;
+			if ((num >> i) & 1)
+				ft_ra(f);
+			else
+				ft_pb(f);
+			j++;
 		}
-		while (f->a->head->val < midpoint)
+		while (f->b->len != 0)
+			ft_pa(f);
+		i++;
+	}
+}
+
+int	ft_sorted(t_node *n, size_t len, int ascending)
+{
+	t_node	*tmp;
+
+	tmp = n;
+	while (--len)
+	{
+		if ((tmp->val > tmp->next->val && ascending)
+			|| (tmp->val < tmp->next->val && !ascending))
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
+void	ft_sorted_offset(t_frame *f)
+{
+	size_t	i;
+	t_node	*tmp;
+
+	tmp = f->a->head;
+	i = 0;
+	while (i < f->a->len)
+	{
+		if (ft_sorted(tmp, f->a->len, 1))
+			break ;
+		tmp = tmp->next;
+		i++;
+	}
+	if (i <= f->a->len)
+	{
+		if (i > (f->a->len / 2))
 		{
-			ft_pb(f);
-			pb_counter--;
-		}
-		direction = ft_get_direction(f, midpoint);
-		if (direction < 0)
-			while (direction++)
+			i = f->a->len - i;
+			while (i--)
 				ft_rra(f);
-		else if (direction > 0)
-			while (direction--)
+		}
+		else
+			while (i--)
 				ft_ra(f);
 	}
 }
 
-void	ft_sort_pa(t_frame *f, int midpoint, int *chunks, int chunk_count)
+void	ft_rotate(t_frame *f, int target, int max)
 {
-	int	rb_counter;
-	int	pa_counter;
+	size_t	i;
+	t_node	*tmp;
 
-	while (chunk_count >= 0)
+	tmp = f->a->head;
+	i = 0;
+	while (i < f->a->len)
 	{
-		rb_counter = 0;
-		pa_counter = 0;
-		midpoint = ft_get_midpoint(f->b->head, chunks[chunk_count]);
-		while (chunks[chunk_count] > 0)
+		if (tmp->val == target + 1 || (target == max && tmp->val == 0)
+			|| (target > tmp->prev->val && target < tmp->val))
+			break ;
+		tmp = tmp->next;
+		i++;
+	}
+	if (i <= f->a->len)
+	{
+		if (i > (f->a->len / 2))
 		{
-			if (f->b->head->val >= midpoint)
-			{
-				ft_pa(f);
-				pa_counter++;
-				chunks[chunk_count] -= 1;
-			}
-			else
-			{
-				ft_rb(f);
-				rb_counter++;
-			}
+			i = f->a->len - i;
+			while (i--)
+				ft_rra(f);
 		}
-		while (rb_counter--)
-			ft_rrb(f);
-		chunk_count--;
+		else
+			while (i--)
+				ft_ra(f);
 	}
 }

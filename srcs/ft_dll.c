@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll.c                                              :+:      :+:    :+:   */
+/*   ft_dll.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgoffaux <sgoffaux@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 11:32:05 by sgoffaux          #+#    #+#             */
-/*   Updated: 2021/05/19 10:42:42 by sgoffaux         ###   ########.fr       */
+/*   Updated: 2021/07/14 13:25:52 by sgoffaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_node	*ft_create_node(int num)
 	return (node);
 }
 
-void	ft_insert_before_head(t_node *head, t_node *node)
+void	ft_insert_before(t_node *head, t_node *node)
 {
 	if (!head || !node)
 		return ;
@@ -38,7 +38,7 @@ void	ft_insert_before_head(t_node *head, t_node *node)
 		node->prev->next = node;
 }
 
-void	ft_insert_after_head(t_node *head, t_node *node)
+void	ft_insert_after(t_node *head, t_node *node)
 {
 	if (!head || !node)
 		return ;
@@ -66,23 +66,4 @@ t_node	*ft_free_node(t_node *node)
 		node = NULL;
 	free(tmp);
 	return (node);
-}
-
-void	ft_print_dll(t_node *head)
-{
-	t_node *tmp;
-
-	if (head)
-	{
-		printf("%d\n", head->val);
-		if (head->next)
-		{
-			tmp = head->next;
-			while (tmp != head)
-			{
-				printf("%d\n", tmp->val);
-				tmp = tmp->next;
-			}
-		}
-	}
 }

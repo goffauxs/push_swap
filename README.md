@@ -70,3 +70,7 @@ As the algorithm works on the numbers in binary format, the worst case performan
 Here is a visual example of the algorithm sorting a list of 1 to 50 in random order:
 
 ![](https://github.com/goffauxs/push_swap/blob/main/push_swap.gif)
+
+## Installation
+
+Both the push_swap executable and checker executable are compiled using `make all`

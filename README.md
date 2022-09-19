@@ -53,8 +53,8 @@ void	radix_sort(t_stack *a, t_stack *b, size_t max_digits)
 			i++;
 		}
 		/*
-			once all numbers with the current digit being 0 are in stack A, 
-			we push them all back to stack A to prepare the next pass over the next digit
+			once all numbers with the current digit being 0 are in stack B, 
+			we push them back to stack A for the next pass over the next digit
 		*/
 		while (f->b->len != 0)
 			ft_pa(f);

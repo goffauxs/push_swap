@@ -67,6 +67,6 @@ As the algorithm works on the numbers in binary format, the worst case performan
 
 ## Example
 
-Here is a visual example of the algorithm sorting a list of 100 random numbers:
+Here is a visual example of the algorithm sorting a list of 1 to 50 in random order:
 
 ![](https://github.com/goffauxs/push_swap/blob/main/push_swap.gif)

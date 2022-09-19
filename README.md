@@ -63,7 +63,11 @@ void	radix_sort(t_stack *a, t_stack *b, size_t max_digits)
 }
 ```
 
-As the algorithm works on the numbers in binary format, the worst case performance complexity would be of <code>O(n * log<sub>2</sub>n)</code>
+As the algorithm works on the numbers in binary format, the complexity would be the following:
+
+Performance complexity: <code>O(n * log<sub>2</sub>n)</code>
+
+Space complexity: <code>O(n + log<sub>2</sub>n)</code>
 
 ## Example
 
